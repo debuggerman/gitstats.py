@@ -29,7 +29,9 @@ class GitHubFetcher:
 		pass
 
 	def getOrgInfo(self):
-		orgInfo = json.loads(getAuthUrlRequest("%s/%s" % self.orgUrl, self.orgName).read())
+		url = "%s/%s" % (self.orgUrl, self.orgName)
+		print "Url = %s" % url
+		orgInfo = json.loads(self.getAuthUrlRequest(url).read())
 		return orgInfo
 		pass
 
@@ -49,6 +51,17 @@ class GitHubFetcher:
 				pass
 
 		pass
+
+		###
+#		for aRepoUrl in repoUrls:
+#	print "Getting commits for %s" % aRepoUrl[0]
+#	repoDetails = json.loads(getAuthUrlRequest(aRepoUrl[1]).read())
+#	commitUrl = repoDetails["commits_url"]
+#	commitUrl = commitUrl.replace("{/sha}","")
+#	commits = json.loads(getAuthUrlRequest(commitUrl).read())
+#	print "found %d commits..." % len(commits)
+
+
 
 	def getAllCommitsSince(self, reposList, sinceDate):
 		#if since date is None, return all

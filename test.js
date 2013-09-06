@@ -14,9 +14,10 @@ function get_data() {
 
 	var client = github.client(accesstoken);
 	
-	client.get('orgs/coeus-solutions', function(err, status, body){
+	client.get('orgs/coeus-solutions/repos', function(err, status, body){
 		//body is already json, you can start parsing it
-		github_emitter.emit("data", JSON.stringify(body));
+		var repo1 = body[0];
+		github_emitter.emit("data", "found " + JSON.stringify(repo1.commits_url) + " repositories...");
 		
 	});
 }
